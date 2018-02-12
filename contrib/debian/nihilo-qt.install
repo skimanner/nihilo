@@ -1,0 +1,6 @@
+usr/local/bin/nihilo-qt usr/bin
+share/pixmaps/nihilo32.xpm usr/share/pixmaps
+share/pixmaps/nihilo16.xpm usr/share/pixmaps
+share/pixmaps/nihilo128.png usr/share/pixmaps
+debian/nihilo-qt.desktop usr/share/applications
+debian/nihilo-qt.protocol usr/share/kde4/services/

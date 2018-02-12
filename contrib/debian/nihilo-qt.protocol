@@ -1,0 +1,11 @@
+[Protocol]
+exec=nihilo-qt '%u'
+protocol=nihilo
+input=none
+output=none
+helper=true
+listing=
+reading=false
+writing=false
+makedir=false
+deleting=false
