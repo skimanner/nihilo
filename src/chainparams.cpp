@@ -42,16 +42,14 @@ static CBlock CreateGenesisBlock(const char* pszTimestamp, const CScript& genesi
  * Build the genesis block. Note that the output of its generation
  * transaction cannot be spent since it did not originally exist in the
  * database.
- *
- * CBlock(hash=00000ffd590b14, ver=1, hashPrevBlock=00000000000000, hashMerkleRoot=e0028e, nTime=1390095618, nBits=1e0ffff0, nNonce=28917698, vtx=1)
- *   CTransaction(hash=e0028e, ver=1, vin.size=1, vout.size=1, nLockTime=0)
- *     CTxIn(COutPoint(000000, -1), coinbase 04ffff001d01044c5957697265642030392f4a616e2f3230313420546865204772616e64204578706572696d656e7420476f6573204c6976653a204f76657273746f636b2e636f6d204973204e6f7720416363657074696e6720426974636f696e73)
- *     CTxOut(nValue=50.00000000, scriptPubKey=0xA9037BAC7050C479B121CF)
- *   vMerkleTree: e0028e
+ *Converting genesis hash to string: CBlock(hash=00000c62a60c42507246e548c2876864b976c69b3ab1d78c7454b0380f186e26, ver=1, hashPrevBlock=0000000000000000000000000000000000000000000000000000000000000000, hashMerkleRoot=f1c49e9f461b67cf5befb4c7edf133e2dacbb57fac64a5cb6682423c1533ac20, nTime=1518415703, nBits=1e0ffff0, nNonce=979391, vtx=1)
+  CTransaction(hash=f1c49e9f46, ver=1, vin.size=1, vout.size=1, nLockTime=0)
+    CTxIn(COutPoint(0000000000000000000000000000000000000000000000000000000000000000, 4294967295), coinbase 04ffff001d01042231312f30322f3138204e6968696c6f204d61726b6574706c616365204c61756e6368)
+    CTxOut(nValue=50.00000000, scriptPubKey=410424e63bd76b81e25f2d0f945b0c)
  */
 static CBlock CreateGenesisBlock(uint32_t nTime, uint32_t nNonce, uint32_t nBits, int32_t nVersion, const CAmount& genesisReward)
 {
-    const char* pszTimestamp = "27th January 2018 - The NYX is relocated at 11 Wall Street.";
+    const char* pszTimestamp = "11/02/18 Nihilo Marketplace Launch";
     const CScript genesisOutputScript = CScript() << ParseHex("0424e63bd76b81e25f2d0f945b0c743b2cc6283bc7603d577c76201203c7391b9277c38fa8fe7ec8bd2a29576c062e691070637d4a47ca650adce63f2547d49207") << OP_CHECKSIG;
     return CreateGenesisBlock(pszTimestamp, genesisOutputScript, nTime, nNonce, nBits, nVersion, genesisReward);
 }
@@ -121,10 +119,10 @@ public:
         nMaxTipAge = 6 * 60 * 60; // ~144 blocks behind -> 2 x fork detection time, was 24 * 60 * 60 in bitcoin
         nPruneAfterHeight = 100000;
 
-        genesis = CreateGenesisBlock(1517054400, 3798869, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1518415703, 979391, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x00000d72d411dc83f7f09f88c7d57c77d3dc061eec14806a958c051902602636"));
-        assert(genesis.hashMerkleRoot == uint256S("0xbb3755d2f47f9f30081b068778b2c607fa86359d74056801f7d40c2f1f697375"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00000c62a60c42507246e548c2876864b976c69b3ab1d78c7454b0380f186e26"));
+        assert(genesis.hashMerkleRoot == uint256S("0xf1c49e9f461b67cf5befb4c7edf133e2dacbb57fac64a5cb6682423c1533ac20"));
 
 
         vSeeds.push_back(CDNSSeedData("nihilo.space", "ns1.nihilo.space"));
@@ -168,11 +166,11 @@ public:
 
 		checkpointData = (CCheckpointData) {
 			boost::assign::map_list_of
-			(  0, uint256S("0x00000d72d411dc83f7f09f88c7d57c77d3dc061eec14806a958c051902602636")),
-		        1515715200,    // * UNIX timestamp of last checkpoint block
-			30252,        // * total number of transactions between genesis and last checkpoint
+			(  0, uint256S("0x00000c62a60c42507246e548c2876864b976c69b3ab1d78c7454b0380f186e26")),
+		        //1515715200,    // * UNIX timestamp of last checkpoint block
+			//30252,        // * total number of transactions between genesis and last checkpoint
 					   //   (the tx=... number in the SetBestChain debug.log lines)
-			2800           // * estimated number of transactions per day after checkpoint
+			//2800           // * estimated number of transactions per day after checkpoint
 		};
     }
 };
@@ -229,10 +227,10 @@ public:
         nMaxTipAge = 0x7fffffff; // allow mining on top of old blocks for testnet
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1517054400, 3798869, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1518415703, 979391, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x00000d72d411dc83f7f09f88c7d57c77d3dc061eec14806a958c051902602636"));
-        assert(genesis.hashMerkleRoot == uint256S("0xbb3755d2f47f9f30081b068778b2c607fa86359d74056801f7d40c2f1f697375"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00000c62a60c42507246e548c2876864b976c69b3ab1d78c7454b0380f186e26"));
+        assert(genesis.hashMerkleRoot == uint256S("0xf1c49e9f461b67cf5befb4c7edf133e2dacbb57fac64a5cb6682423c1533ac20"));
 
 
         vFixedSeeds.clear();
@@ -267,7 +265,7 @@ public:
 
         checkpointData = (CCheckpointData) {
             boost::assign::map_list_of
-            ( 0, uint256S("0x00000d72d411dc83f7f09f88c7d57c77d3dc061eec14806a958c051902602636")),
+            ( 0, uint256S("0x00000c62a60c42507246e548c2876864b976c69b3ab1d78c7454b0380f186e26")),
 
             //1511953201, // * UNIX timestamp of last checkpoint block
             // 0,     // * total number of transactions between genesis and last checkpoint
@@ -327,10 +325,10 @@ public:
         nDefaultPort = 13855;
         nPruneAfterHeight = 1000;
 
-        genesis = CreateGenesisBlock(1517054400, 3798869, 0x1e0ffff0, 1, 50 * COIN);
+        genesis = CreateGenesisBlock(1518415703, 979391, 0x1e0ffff0, 1, 50 * COIN);
         consensus.hashGenesisBlock = genesis.GetHash();
-        assert(consensus.hashGenesisBlock == uint256S("0x00000d72d411dc83f7f09f88c7d57c77d3dc061eec14806a958c051902602636"));
-        assert(genesis.hashMerkleRoot == uint256S("0xbb3755d2f47f9f30081b068778b2c607fa86359d74056801f7d40c2f1f697375"));
+        assert(consensus.hashGenesisBlock == uint256S("0x00000c62a60c42507246e548c2876864b976c69b3ab1d78c7454b0380f186e26"));
+        assert(genesis.hashMerkleRoot == uint256S("0xf1c49e9f461b67cf5befb4c7edf133e2dacbb57fac64a5cb6682423c1533ac20"));
 
         vFixedSeeds.clear(); //! Regtest mode doesn't have any fixed seeds.
         vSeeds.clear();  //! Regtest mode doesn't have any DNS seeds.
